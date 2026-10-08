@@ -1,0 +1,1 @@
+{"name":"ボンバーひろば","image":"mcr.microsoft.com/devcontainers/javascript-node:24","forwardPorts":[3000],"portsAttributes":{"3000":{"label":"ボンバーひろば","onAutoForward":"openPreview"}}}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ボンバーひろば — 3Dボンバーゲーム</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<main class="arena" aria-label="ボンバーひろば">
+ <canvas id="view" aria-label="一人称のプレイ画面"></canvas>
+ <div class="top-hud">
+  <div class="stage"><span class="game-name">ボンバーひろば</span><strong>ステージ 1</strong><small>みどりのひろば</small></div>
+  <section class="stats" aria-label="現在のステータス">
+   <div><span>🔥 火力</span><strong id="range">02 <small>爆風の長さ</small></strong></div>
+   <div><span>● 爆弾</span><strong id="capacity">01 <small>設置可能数</small></strong></div>
+   <div><span>☺ ライバル</span><strong id="enemies">03 <small>残りの敵</small></strong></div>
+   <div><span>★ スコア</span><strong id="score">0000 <small>スコア</small></strong></div>
+  </section>
+  <div class="timer"><small>プレイ時間</small><strong id="clock">00:00</strong></div>
+ </div>
+ <div id="danger-notice" hidden role="status" aria-live="off"></div>
+ <div class="crosshair" aria-hidden="true">+</div>
+ <aside class="map-wrap" aria-label="ステージマップ">
+  <strong>ステージマップ</strong>
+  <canvas id="map" width="468" height="468"></canvas>
+  <div class="map-legend"><span><i class="player-dot"></i>自分</span><span><i class="enemy-dot"></i>敵</span><span><i class="bomb-dot"></i>爆弾</span></div>
+ </aside>
+ <div id="overlay">
+  <div class="badge">あそぶ準備はできた？</div>
+  <h2 id="message">ボンバーひろばへようこそ！</h2>
+  <p id="description">爆風は十字に広がります。<br>ブロックを盾にして、3体の敵を倒そう。</p>
+  <button id="start" disabled>CPUとあそぶ <span>▶</span></button>
+  <small id="control-help">クリックするとマウスで視点を操作できます</small>
+  <label class="quality-setting">画質 <select id="quality"><option value="auto">自動（おすすめ）</option><option value="low">軽量</option><option value="high">高画質</option></select></label>
+  <section id="online-panel" aria-label="通信対戦">
+   <h3>友達と通信対戦 <span>2〜4人</span></h3>
+   <label class="username-setting" for="username">ユーザーネーム<input id="username" disabled type="text" placeholder="名前を入力" maxlength="24" autocomplete="nickname"><small>12文字まで・未入力でも参加できます</small></label>
+   <div id="room-entry"><button id="create-room" class="secondary" disabled>部屋を作る</button><form id="join-form"><input id="room-code" aria-label="部屋コード" placeholder="部屋コード" maxlength="6" autocomplete="off" pattern="[a-fA-F0-9]{6}" required><button class="secondary" type="submit" disabled>参加する</button></form></div>
+   <div id="room-lobby" hidden><div class="room-heading">部屋コード <strong id="room-label"></strong><button id="copy-room" class="small-button">招待URLをコピー</button></div><p id="room-members"></p><button id="start-match" class="secondary">対戦開始</button><button id="leave-room" class="small-button">部屋を退出</button></div>
+   <p id="network-message" role="status" aria-live="polite">ゲームを読み込んでいます…</p>
+  </section>
+ </div>
+ <div id="touch-controls" hidden aria-label="タッチ操作">
+  <div id="joystick" role="group" aria-label="左スティックで移動"><span class="stick-label">移動</span><div id="stick-knob"></div></div>
+  <span class="look-hint">右側をスワイプして視点操作</span>
+  <button id="touch-bomb" aria-label="爆弾を置く">●<small>爆弾</small></button>
+  <button id="touch-pause" aria-label="操作を中断">Ⅱ</button>
+ </div>
+ <div class="bottom-hud"><span><i></i> <span id="state">準備中</span></span><span>WASD 移動 <b>／</b> マウス・← → 視点 <b>／</b> SPACE 爆弾 <b>／</b> ESC 一時停止</span></div>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
